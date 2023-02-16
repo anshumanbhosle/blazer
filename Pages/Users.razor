@@ -1,0 +1,367 @@
+﻿@page "/users";
+
+@using System.Net.Http.Json
+@using MudBlazor.Examples.Data.Models
+@inject HttpClient httpClient
+
+<PageTitle>Index</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="background: #003A48; color: white;font-weight: 500; font-size: 16px;">
+                        CUSTOMER
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    @if (Elements == null)
+                    {
+                        <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+                    }
+                    else
+                    {
+               
+                    <MudTable class="customize-mud-table" Items="@Elements" Dense="true" Hover="true" Bordered="@bordered" Striped="@striped" Filter="new Func<Element,bool>(FilterFunc1)">
+                
+                        <ToolBarContent>
+
+                            <MudSpacer />
+                            <div class="row w-100">
+                                <div class="col-md-6 col-8">
+                                    <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 ml-0 customize-mud-search"></MudTextField>
+                                </div>
+                                <div class="col-md-6 col-4">
+                                    <div class="justify-content-end d-flex align-items-center h-100">
+                                        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.FilterAlt" Color="Color.Secondary" style="@($"color:{Colors.Shades.Black};")" Class="pa-2 pr-2 pl-2">Filter</MudButton>
+                                            <button type="button" class="buttoncss1  mr-5 ml-5" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Add</button>
+                                        @* Add Model *@
+                                            <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                            <div class="modal-dialog modal-fullscreen">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="addCustomerModalLabel">Add Customer</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerName" class="form-label">Customer Name</label>
+                                                                        <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="email" class="form-label">Email Address</label>
+                                                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerFirstName" class="form-label">Customer First Name</label>
+                                                                        <input type="text" class="form-control" id="customerFirstName">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerLastName" class="form-label">Customer Last Name</label>
+                                                                        <input type="text" class="form-control" id="customerLastName">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="phone" class="form-label">Phone Number</label>
+                                                                        <input type="text" class="form-control" id="phone">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="NoOfLicense" class="form-label">No. of license</label>
+                                                                        <input type="text" class="form-control" id="NoOfLicense">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="NoOfLicense" class="form-label">Feature Set</label>
+                                                                <MudSelect T="string" Label="" Variant="Variant.Outlined" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                                                                    @foreach (var state in states)
+                                                                    {
+                                                                        <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                                                                    }
+                                                                </MudSelect>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*Add Model end*@
+
+                                        @*Edit Model*@
+                                            <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                            <div class="modal-dialog modal-fullscreen">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                            <h5 class="modal-title" id="editCustomerModalLabel">Edit Customer</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerName" class="form-label">Customer Name</label>
+                                                                        <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="email" class="form-label">Email Address</label>
+                                                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerFirstName" class="form-label">Customer First Name</label>
+                                                                        <input type="text" class="form-control" id="customerFirstName">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerLastName" class="form-label">Customer Last Name</label>
+                                                                        <input type="text" class="form-control" id="customerLastName">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="phone" class="form-label">Phone Number</label>
+                                                                        <input type="text" class="form-control" id="phone">
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="NoOfLicense" class="form-label">No. of license</label>
+                                                                        <input type="text" class="form-control" id="NoOfLicense">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="NoOfLicense" class="form-label">Feature Set</label>
+                                                                <MudSelect T="string" Label="" Variant="Variant.Outlined" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                                                                    @foreach (var state in states)
+                                                                    {
+                                                                        <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                                                                    }
+                                                                </MudSelect>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="button" variant="danger" class="ms-2 red-btn">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*Edit Model end*@
+
+                                        @*View Model*@
+                                            <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="viewCustomerModal" tabindex="-1" aria-labelledby="viewCustomerModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                            <div class="modal-dialog modal-fullscreen">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                            <h5 class="modal-title" id="viewCustomerModalLabel">Edit Customer</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerName" class="form-label">Customer Name</label>
+                                                                        <p><b>Sarah	Tucker</b></p>
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="email" class="form-label">Email Address</label>
+                                                                        <p><b>s.tuker@gmail.com</b></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerFirstName" class="form-label">Customer First Name</label>
+                                                                        <p><b>Sarah</b></p>
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="customerLastName" class="form-label">Customer Last Name</label>
+                                                                        <p><b>Tucker</b></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="phone" class="form-label">Phone Number</label>
+                                                                        <p><b>+1 2928931529</b></p>
+                                                                    </div>
+                                                                </div>
+                                                                    <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="NoOfLicense" class="form-label">No. of license</label>
+                                                                        <p><b>2</b></p>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="NoOfLicense" class="form-label">Feature Set</label>
+                                                                <p><b>Bridget Theriveaquai</b></p>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" variant="danger" class="ms-2 red-btn" data-bs-dismiss="modal">
+                                                            <svg class="me-2" width="27" height="18" viewBox="0 0 27 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M8.17495 17.1L0.787451 9.75001C0.662451 9.62501 0.574951 9.50001 0.524951 9.37501C0.474951 9.25001 0.449951 9.11251 0.449951 8.96251C0.449951 8.81251 0.474951 8.67501 0.524951 8.55001C0.574951 8.42501 0.662451 8.30001 0.787451 8.17501L8.17495 0.78751C8.37495 0.58751 8.63745 0.48126 8.96245 0.46876C9.28745 0.45626 9.56245 0.56251 9.78745 0.78751C10.0125 1.01251 10.125 1.28126 10.125 1.59376C10.125 1.90626 10.0125 2.17501 9.78745 2.40001L4.34995 7.83751H25.875C26.2 7.83751 26.4687 7.94376 26.6812 8.15626C26.8937 8.36876 27 8.63751 27 8.96251C27 9.28751 26.8937 9.55626 26.6812 9.76876C26.4687 9.98126 26.2 10.0875 25.875 10.0875H4.34995L9.78745 15.525C9.98745 15.725 10.0937 15.9813 10.1062 16.2938C10.1187 16.6063 10.0125 16.875 9.78745 17.1C9.56245 17.325 9.2937 17.4375 8.9812 17.4375C8.6687 17.4375 8.39995 17.325 8.17495 17.1Z" fill="white" />
+                                                            </svg>
+                                                            Back
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*View Model end*@
+
+                                        @* Delete Model *@
+                                        <div class="modal fade" id="deleteCustomerModal" tabindex="-1" aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteCustomerModalLabel">Delete Customer</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M31.3971 9.75L44.8205 33C46.5526 36 44.3875 39.75 40.9234 39.75H14.0766C10.6125 39.75 8.44744 36 10.1795 33L23.6029 9.75001C25.3349 6.75 29.6651 6.75 31.3971 9.75Z" stroke="#F7BE16" stroke-width="3" />
+                                                            <path d="M26.2963 21.3954C26.2463 20.2287 26.1463 18.9037 25.9963 17.4204V17.1704H27.0213C27.288 17.1704 27.5796 17.1621 27.8963 17.1454C28.213 17.1287 28.463 17.1037 28.6463 17.0704L28.6963 17.2704C28.663 17.5871 28.6296 17.9037 28.5963 18.2204C28.5796 18.5371 28.5546 18.8621 28.5213 19.1954C28.5046 19.5621 28.4796 19.9287 28.4463 20.2954C28.4296 20.6621 28.413 21.0287 28.3963 21.3954L28.0963 29.1454H26.5713L26.2963 21.3954ZM27.3213 34.8704C26.9046 34.8704 26.5463 34.7204 26.2463 34.4204C25.963 34.1204 25.8213 33.7621 25.8213 33.3454C25.8213 32.9121 25.9713 32.5537 26.2713 32.2704C26.5713 31.9871 26.9213 31.8454 27.3213 31.8454C27.7546 31.8454 28.113 31.9871 28.3963 32.2704C28.6796 32.5537 28.8213 32.9121 28.8213 33.3454C28.8213 33.7621 28.6796 34.1204 28.3963 34.4204C28.113 34.7204 27.7546 34.8704 27.3213 34.8704Z" fill="black" />
+                                                        </svg>
+                                                            <p class="text-center">
+                                                                This will delete the Customer from the application.
+                                                                Do you want to proceed
+                                                            </p>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*Delete Model end*@
+                                    </div>
+                                </div>
+                            </div>
+                        </ToolBarContent>
+                        <HeaderContent>
+                                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">Customer Name</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Number)">Email Address</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Number)">Phone Number</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Number)">User Group</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Number)">Feature Set</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Number)">Customer Staff</MudTableSortLabel></MudTh>
+                            <MudTh Style="margin-right: -15px">Actions</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Name">@context.Name</MudTd>
+                            <MudTd DataLabel="Email">Dummy5667@gmail.com</MudTd>
+                            <MudTd DataLabel="Number">9999999999</MudTd>
+                                <MudTd DataLabel="UserGroup"><MudLink class="view-customer-staff" Href="/users">View</MudLink></MudTd>
+                            <MudTd DataLabel="FeatureSet">Dummy5667</MudTd>
+                                <MudTd DataLabel="CustomerStaff"><MudLink class="view-customer-staff" Href="/users/customer">View</MudLink></MudTd>
+                            <MudTd DataLabel="Actions">
+                                <MudTooltip Text="View">
+                                    <MudIconButton Icon="@Icons.Material.Outlined.RemoveRedEye" Style="@($"color:{Colors.Red.Darken1};")" data-bs-toggle="modal" data-bs-target="#viewCustomerModal" />
+                                </MudTooltip>
+                                <MudTooltip Text="Edit">
+                                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" Style="@($"color:{Colors.Red.Darken1};")" data-bs-toggle="modal" data-bs-target="#editCustomerModal" />
+                                </MudTooltip>
+                                <MudTooltip Text="Delete">
+                                    <MudIconButton Icon="@Icons.Material.Outlined.Delete" Style="@($"color:{Colors.Red.Darken1};")" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" />
+                                </MudTooltip>
+
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager class="customize-pagination" HorizontalAlignment="HorizontalAlignment.Left" />
+                        </PagerContent>
+                                </MudTable>
+                  
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+
+    private HashSet<Element> selectedItems = new HashSet<Element>();
+
+    private IEnumerable<Element> Elements = new List<Element>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Elements = await httpClient.GetFromJsonAsync<List<Element>>("https://getdetailsfaragut-apim.azure-api.net/FarragutApis/reappraisal/beaufort");
+    }
+
+    private bool FilterFunc1(Element element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(Element element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
+            return true;
+        return false;
+    }
+    private string value { get; set; } = "Nothing selected";
+    private IEnumerable<string> options { get; set; } = new HashSet<string>() {  };
+
+    private string[] states =
+    {
+        "Patty Report (There are many variations of passages of Lorem.. )", "Ty Ayelloribbin Report (There are many variations of passages .. )", "Ray Sin Report (There are many variatios of passages of Lorem.. )", "Wayde N. Thabalanz (There are many variations of of Lorem.. )",
+        "Wynn Report (There are many variations of passages of Lorem.. )"
+    };
+}

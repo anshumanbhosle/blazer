@@ -1,0 +1,327 @@
+﻿@page "/featureset";
+
+@using System.Net.Http.Json
+@using MudBlazor.Examples.Data.Models
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient httpClient
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            @if (Elements == null)
+            {
+                <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+            }
+            else
+            {
+
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="background: #003A48; color: white;font-weight: 500;
+font-size: 16px;">FEATURE SET</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <MudTable  class="customize-mud-table"  Items="@Elements" Dense="true" Hover="true" Bordered="@bordered" Striped="@striped" Filter="new Func<Element,bool>(FilterFunc1)">
+                    
+                <ToolBarContent>
+                      
+                                
+                           
+                    <MudSpacer />
+                    <div class="row w-100">
+                        <div class="col-md-6 col-8">
+                                        <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 ml-0  customize-mud-search"></MudTextField>
+                        </div>
+                        <div class="col-md-6 col-4">
+                            <div class="justify-content-end d-flex align-items-center h-100">
+                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.FilterAlt" Class="pa-2 pr-2 pl-2 filter-btn">Filter</MudButton>
+                                <button type="button" class="buttoncss1  mr-5 ml-5" data-bs-toggle="modal" data-bs-target="#addReportModal">Add</button>
+                                @* Add Model *@
+
+                                             <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="addReportModal" tabindex="-1" aria-labelledby="addReportModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                                <div class="modal-dialog modal-fullscreen">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                    <h5 class="modal-title" id="addReportModalLabel">Add Feature Set</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body"> 
+                                           @*     <EditFor Model="@EmployeeBase">
+    <DataAnnotationsValidator />  *@
+                                                
+                                                    <div class="row">
+                                                        
+                                                            <div class="mb-3">
+                                                                    <label for="Featureset" class="form-label">Feature Set Name</label>
+                                                                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" />
+                                                                   @* <ValidationMessage For="@(() => Employee.Name)" />*@
+                                                            </div>
+                                                       
+                                                           
+                                                    </div>
+                                                        <div class="row">
+
+                                                            <div class="mb-3">
+                                                                    <label for="Feature" class="form-label">Applications</label>
+                                                                <MudSelect T="string" Label="" Variant="Variant.Outlined" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                                                                    @foreach (var state in states)
+                                                                    {
+                                                                        <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                                                                    }
+                                                                </MudSelect>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="mb-3">
+                                                                <label for="Feature" class="form-label">Reports</label>
+                                                                <MudSelect T="string" Label="" Variant="Variant.Outlined" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                                                                    @foreach (var state in states)
+                                                                    {
+                                                                        <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                                                                    }
+                                                                </MudSelect>
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="name" class="form-label">
+                                                                    Customer Names
+                                                                </label>
+                                                                <MudSelect T="string" Label="" Variant="Variant.Outlined" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                                                                    @foreach (var state in states)
+                                                                    {
+                                                                        <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                                                                    }
+                                                                </MudSelect>
+                                                            </div></div>
+                                                  
+                                                    @*<div class="mb-3">
+                                                    <label for="uploadLogo" class="form-label">Upload Logo</label>
+                                                    <input class="choose-file form-control form-control-lg" type="file" id="uploadLogo" multiple>
+                                                    </div>*@
+                                                    @*<button class="me-2 red-btn-outline">Cancel</button>
+                                                    <button variant="danger" class="ms-2 red-btn">Add</button>*@
+                                                @*</EditFor>*@
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*Add Model end*@
+
+                                @* View Model *@
+                                            <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="viewReportModal" tabindex="-1" aria-labelledby="viewReportModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                                <div class="modal-dialog modal-fullscreen">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                    <h5 class="modal-title" id="viewReportModalLabel">View Feature Set</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="row">
+                                                       
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Feature Set Name</label>
+                                                                <p><b>Hipster Tucker</b></p>
+                                                            </div>
+                                                       
+                                                    </div>
+                                                        <div class="row">
+
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Applications</label>
+                                                                <p><b>Mandingboss , Features 53464</b></p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Reports</label>
+                                                                <p><b>Patty Report There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</b></p>  
+                                                            </div>
+                                                            </div>
+                                                        <div class="row">
+
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Customer Names</label>
+                                                                <p><b>Jonathan Dor, Mosika Dekster</b></p>
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                         
+                                                               
+                                                              
+                                                       
+
+                                               
+                                                    @*<div class="row">
+                                                    <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                    <label for="datasetId" class="form-label">Dataset Id</label>
+                                                    <input type="text" class="form-control" id="datasetId" aria-describedby="emailHelp">
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                    <label for="embeddedURL" class="form-label">Embedded URL</label>
+                                                    <input type="text" class="form-control" id="embeddedURL" aria-describedby="emailHelp">
+                                                    </div>
+                                                    </div>
+                                                    </div>*@
+                                                    @*<div class="mb-3">
+                                                    <label for="application" class="form-label">Application</label>
+                                                    <input type="text" class="form-control" id="application" aria-describedby="emailHelp">
+                                                    </div>*@
+                                                    <div class="mb-3">
+                                                        <label for="description" class="form-label">Description</label>
+                                                        <p>
+                                                            <b>
+                                                                It is a long established fact that a reader will be
+                                                                distracted by the readable content of a page when
+                                                                looking at its layout.
+                                                            </b>
+                                                        </p>
+                                                    </div>
+                                                    @*<div class="mb-3">
+                                                    <label for="uploadLogo" class="form-label">Upload Logo</label>
+                                                    <input class="choose-file form-control form-control-lg" type="file" id="uploadLogo" multiple>
+                                                    </div>*@
+                                                    @*<button class="me-2 red-btn-outline">Cancel</button>
+                                                    <button variant="danger" class="ms-2 red-btn">Add</button>*@
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*View Model end*@
+                                            @* Delete Model *@
+                                            <div class="modal fade" id="deleteReportModal" tabindex="-1" aria-labelledby="deleteReportModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deleteReportModalLabel">Delete Feature Set</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                            <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M31.3971 9.75L44.8205 33C46.5526 36 44.3875 39.75 40.9234 39.75H14.0766C10.6125 39.75 8.44744 36 10.1795 33L23.6029 9.75001C25.3349 6.75 29.6651 6.75 31.3971 9.75Z" stroke="#F7BE16" stroke-width="3" />
+                                                                <path d="M26.2963 21.3954C26.2463 20.2287 26.1463 18.9037 25.9963 17.4204V17.1704H27.0213C27.288 17.1704 27.5796 17.1621 27.8963 17.1454C28.213 17.1287 28.463 17.1037 28.6463 17.0704L28.6963 17.2704C28.663 17.5871 28.6296 17.9037 28.5963 18.2204C28.5796 18.5371 28.5546 18.8621 28.5213 19.1954C28.5046 19.5621 28.4796 19.9287 28.4463 20.2954C28.4296 20.6621 28.413 21.0287 28.3963 21.3954L28.0963 29.1454H26.5713L26.2963 21.3954ZM27.3213 34.8704C26.9046 34.8704 26.5463 34.7204 26.2463 34.4204C25.963 34.1204 25.8213 33.7621 25.8213 33.3454C25.8213 32.9121 25.9713 32.5537 26.2713 32.2704C26.5713 31.9871 26.9213 31.8454 27.3213 31.8454C27.7546 31.8454 28.113 31.9871 28.3963 32.2704C28.6796 32.5537 28.8213 32.9121 28.8213 33.3454C28.8213 33.7621 28.6796 34.1204 28.3963 34.4204C28.113 34.7204 27.7546 34.8704 27.3213 34.8704Z" fill="black" />
+                                                            </svg>
+                                                            <p class="text-center">Are you sure want to delete <span>Feature 53464</span>.</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-center">
+                                                            <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*Delete Model end*@
+                            </div>
+                        </div>
+                    </div>
+                </ToolBarContent>
+
+                <HeaderContent>
+                    <MudTh>Feature Set Name</MudTh>
+                    <MudTh>Applications</MudTh>
+                    <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">Reports</MudTableSortLabel></MudTh>
+                    <MudTh>Customer Names</MudTh>
+                    <MudTh Style="margin-right: -15px">Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Nr">Dummy5667</MudTd>
+                    <MudTd DataLabel="Sign">Mandingboss , Features 53464</MudTd>
+                    <MudTd DataLabel="Name">Report 53464</MudTd>
+                    <MudTd DataLabel="Position">@*@context.Name*@ Jonathan Dor, Mosika Dekster</MudTd>
+                    <MudTd DataLabel="Actions">
+                        <MudTooltip Text="View">
+                            <MudIconButton Icon="@Icons.Material.Outlined.RemoveRedEye" Style="@($"color:{Colors.Red.Darken1};")" data-bs-toggle="modal" data-bs-target="#viewReportModal" />
+                        </MudTooltip>
+                        <MudTooltip Text="Edit">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Edit" Style="@($"color:{Colors.Red.Darken1};")" data-bs-toggle="modal" data-bs-target="#addReportModal" />
+                        </MudTooltip>
+                        <MudTooltip Text="Delete">
+                                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Style="@($"color:{Colors.Red.Darken1};")" data-bs-toggle="modal" data-bs-target="#deleteReportModal" />
+                        </MudTooltip>
+
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager HorizontalAlignment="HorizontalAlignment.Left" />
+                </PagerContent> 
+                        </MudTable></div>
+                    
+                </div>
+
+                       
+                  
+            }
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+
+    private HashSet<Element> selectedItems = new HashSet<Element>();
+
+    private IEnumerable<Element> Elements = new List<Element>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Elements = await httpClient.GetFromJsonAsync<List<Element>>("https://getdetailsfaragut-apim.azure-api.net/FarragutApis/reappraisal/beaufort");
+    }
+
+    private bool FilterFunc1(Element element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(Element element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
+            return true;
+        return false;
+    }
+    private string value { get; set; } = "Nothing selected";
+    private IEnumerable<string> options { get; set; } = new HashSet<string>() {  };
+
+    private string[] states =
+    {
+        "Patty Report (There are many variations of passages of Lorem.. )", "Ty Ayelloribbin Report (There are many variations of passages .. )", "Ray Sin Report (There are many variatios of passages of Lorem.. )", "Wayde N. Thabalanz (There are many variations of of Lorem.. )",
+        "Wynn Report (There are many variations of passages of Lorem.. )"
+    };
+    public class EmployeeBase
+    {
+        public string Name { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+        // Rest of the properties
+    }
+
+}

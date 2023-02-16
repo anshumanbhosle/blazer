@@ -3,7 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://testappforblazer.azurewebsites.net/",
+      "applicationUrl": "http://localhost:12215",
+      "sslPort": 44382
     }
   },
   "profiles": {
@@ -12,7 +13,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "https://testappforblazer.azurewebsites.net/;https://testappforblazer.azurewebsites.net/",
+      "applicationUrl": "https://localhost:7211;http://localhost:5041",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

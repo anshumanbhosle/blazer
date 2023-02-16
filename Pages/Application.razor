@@ -1,0 +1,471 @@
+﻿@page "/application";
+
+@*<h3>Application</h3>*@
+
+<div class="container-fluid shadow-box-wrapper application-page p-4">
+    <div class="row d-flex align-items-center mb-3">
+        <div class="col-md-6 col-8">
+            <form class="d-flex search-box">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                @*<button class="btn btn-outline-success" type="submit">Search</button>*@
+            </form>
+        </div>
+        <div class="col-md-6 col-4">
+            <div class="justify-content-end d-flex align-items-center application-form">
+                @*<button class="buttoncss1" data-bs-toggle="modal" data-bs-target="#addApplicationModal"> Add </button>*@
+                <button type="button" class="buttoncss1" data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                    Add
+                </button>
+
+                @* Add Model *@
+                <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="addApplicationModal" tabindex="-1" aria-labelledby="addApplicationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addApplicationModalLabel">Add Application</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="applicationName" class="form-label">Application Name</label>
+                                        <input type="text" class="form-control" id="applicationName" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="uploadLogo" class="form-label">Upload Logo</label>
+                                        <input class="choose-file form-control form-control-lg" type="file" id="uploadLogo" multiple>
+                                    </div>
+                                    @*<button class="me-2 red-btn-outline">Cancel</button>
+                                    <button variant="danger" class="ms-2 red-btn">Add</button>*@
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Add Model end*@
+
+                @*Edit Model*@
+                <div class="modal fade model-component-wrapper modal-fullscreen-sm-down" id="editApplicationModal" tabindex="-1" aria-labelledby="editApplicationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editApplicationModalLabel">Edit Application</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="applicationName" class="form-label">Application Name</label>
+                                        <input type="text" class="form-control" id="applicationName" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="uploadLogo" class="form-label">Upload Logo</label>
+                                        <div class="application-img d-flex align-items-center">
+                                            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z" fill="#747474"/>
+                                            </svg>
+                                            <input class="choose-file form-control form-control-lg" type="file" id="uploadLogo" multiple>
+                                        </div>
+                                    </div>
+                                    @*<button class="me-2 red-btn-outline">Cancel</button>
+                                    <button variant="danger" class="ms-2 red-btn">Add</button>*@
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="me-2 red-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" variant="danger" class="ms-2 red-btn">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Edit Model end*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg
+                                width="34"
+                                height="34"
+                                viewBox="0 0 34 34"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                >
+                                <path
+                                    d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                    fill="#747474"
+                                />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button
+                                class="d-flex align-items-center justify-content-center btn edit-btn"
+                                @*to="/users"
+                                onClick={handleEditShow}*@
+                                    data-bs-toggle="modal" data-bs-target="#editApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg width="34"
+                                     height="34"
+                                     viewBox="0 0 34 34"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                          fill="#747474" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button class="d-flex align-items-center justify-content-center btn edit-btn"
+                                    @*to="/users"
+                                    onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg width="34"
+                                     height="34"
+                                     viewBox="0 0 34 34"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                          fill="#747474" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button class="d-flex align-items-center justify-content-center btn edit-btn"
+                                    @*to="/users"
+                                    onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg
+                                width="34"
+                                height="34"
+                                viewBox="0 0 34 34"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                >
+                                <path
+                                    d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                    fill="#747474"
+                                />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button
+                                class="d-flex align-items-center justify-content-center btn edit-btn"
+                                @*to="/users"
+                                    onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg width="34"
+                                     height="34"
+                                     viewBox="0 0 34 34"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                          fill="#747474" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button class="d-flex align-items-center justify-content-center btn edit-btn"
+                                    @*to="/users"
+                                    onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg
+                                width="34"
+                                height="34"
+                                viewBox="0 0 34 34"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                >
+                                <path
+                                    d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                    fill="#747474"
+                                />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button
+                                class="d-flex align-items-center justify-content-center btn edit-btn"
+                                @*to="/users"
+                                onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg width="34"
+                                     height="34"
+                                     viewBox="0 0 34 34"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                          fill="#747474" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button class="d-flex align-items-center justify-content-center btn edit-btn"
+                                    @*to="/users"
+                                    onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg
+                                width="34"
+                                height="34"
+                                viewBox="0 0 34 34"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                >
+                                <path
+                                    d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                    fill="#747474"
+                                />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button
+                                class="d-flex align-items-center justify-content-center btn edit-btn"
+                                @*to="/users"
+                                onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card application-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <div class="icon-big text-center icon-warning">
+                                <svg width="34"
+                                     height="34"
+                                     viewBox="0 0 34 34"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 30.8479C16.8111 30.8479 16.6281 30.8243 16.451 30.7771C16.274 30.7299 16.1028 30.6591 15.9375 30.5646L5.3125 24.4729C4.98194 24.2841 4.72222 24.0302 4.53333 23.7115C4.34444 23.3927 4.25 23.0327 4.25 22.6313V11.0146C4.25 10.6132 4.35035 10.2473 4.55104 9.9167C4.75174 9.58614 5.01736 9.32642 5.34792 9.13753L15.9729 3.36462C16.1382 3.27017 16.3035 3.20524 16.4688 3.16982C16.634 3.13441 16.8111 3.1167 17 3.1167C17.1889 3.1167 17.366 3.13441 17.5312 3.16982C17.6965 3.20524 17.8618 3.27017 18.0271 3.36462L28.6521 9.13753C28.9826 9.32642 29.2483 9.58614 29.449 9.9167C29.6497 10.2473 29.75 10.6132 29.75 11.0146V22.6313C29.75 23.0327 29.6556 23.3927 29.4667 23.7115C29.2778 24.0302 29.0181 24.2841 28.6875 24.4729L18.0625 30.5646C17.8972 30.6591 17.726 30.7299 17.549 30.7771C17.3719 30.8243 17.1889 30.8479 17 30.8479ZM12.9625 13.5292C13.5056 12.9861 14.1253 12.5434 14.8219 12.2011C15.5184 11.8587 16.2444 11.6875 17 11.6875C17.7556 11.6875 18.4816 11.8587 19.1781 12.2011C19.8747 12.5434 20.4944 12.9861 21.0375 13.5292L26.4562 10.3417L17 5.31253L7.54375 10.3417L12.9625 13.5292ZM15.9375 28.1209V22.2063C14.7097 21.8757 13.6944 21.2323 12.8917 20.2761C12.0889 19.3198 11.6875 18.2278 11.6875 17C11.6875 16.7639 11.6993 16.516 11.7229 16.2563C11.7465 15.9966 11.8174 15.7132 11.9354 15.4063L6.375 12.1125V22.6313L15.9375 28.1209ZM17 20.1875C17.8972 20.1875 18.6528 19.8747 19.2667 19.249C19.8806 18.6233 20.1875 17.8736 20.1875 17C20.1875 16.1028 19.8806 15.3473 19.2667 14.7334C18.6528 14.1195 17.8972 13.8125 17 13.8125C16.1264 13.8125 15.3767 14.1195 14.751 14.7334C14.1253 15.3473 13.8125 16.1028 13.8125 17C13.8125 17.8736 14.1253 18.6233 14.751 19.249C15.3767 19.8747 16.1264 20.1875 17 20.1875ZM18.0625 28.1209L27.625 22.6313V12.1125L22.0646 15.4063C22.1826 15.7368 22.2535 16.0261 22.2771 16.274C22.3007 16.5219 22.3125 16.7639 22.3125 17C22.3125 18.2278 21.9111 19.3198 21.1083 20.2761C20.3056 21.2323 19.2903 21.8757 18.0625 22.2063V28.1209Z"
+                                          fill="#747474" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-6 texxt-right d-flex align-items-center justify-content-end">
+                            <button class="d-flex align-items-center justify-content-center btn edit-btn"
+                                    @*to="/users"
+                                    onClick={handleEditShow}*@ data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row application-card-content mt-1">
+                        <div class="col-md-12">
+                            <h4 class="numbers">Application</h4>
+                            <p class="body-title">
+                                There are many variations of passages of Lorem Ipsum
+                                available, but the majority have suffered alteration in
+                                some form.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addApplicationModal">
+  Launch demo modal
+</button>
+*@
+@code {
+
+}

@@ -1,4 +1,5 @@
-﻿@page "/login"
+﻿@layout SecondaryLayout
+@page "/login"
 
 <div class="container-fluid">
       <div class="row">
@@ -31,9 +32,15 @@
                   placeholder="Enter a Password"
                 />
               </div>
-              <button class="px-5 py-2 buttoncss1">
-               Login
-              </button>
+              <MudLink class="px-5 py-2 mt-2 buttoncss1" Href="/dashboard">Login</MudLink>
+              @*<a  class="px-5 py-2 mt-2 buttoncss1">
+                Login
+              </a>*@
+
+              <div class="or-divider"></div>
+              <div class="login-with-btn">
+                  <a class="" href="/dashboard"><img src="images/google.png" /> Google</a>
+              </div>
             </form>
           </div>
         </div>

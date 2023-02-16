@@ -1,14 +1,24 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-
-   
-   
-
-    <main class="w-100">
-        @*<div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>*@
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+    
+    <main class="w-100 dahsboard-main">
+        <div class="top-row">
+            @*<Title Value="@title" />*@
+            <div class="container-fluid px-5">
+                <div class="row">
+                    <div class="col-6">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="col-6 d-flex align-items-center justify-content-end">
+                        <a href="https://docs.microsoft.com/aspnet/" target="_blank">Mahfuzul Nabil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <article class="content px-0 px-xs-0 px-sm-0 px-md-0">
             @Body

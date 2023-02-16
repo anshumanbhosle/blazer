@@ -1,0 +1,17 @@
+﻿/**
+ * Media query for tablet devices
+ */
+@media only screen and (max-width: 1024px) {
+    .card-col .numbers {
+        font-size: 32px;
+    }
+    .card-col .body-title {
+        font-size: 14px;
+    }
+    .card-divider {
+        padding: 0 !important;
+    }
+    .card-divider .vr {
+        height: 75px !important;
+    }
+}

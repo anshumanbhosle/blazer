@@ -4,7 +4,9 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    /*background-color: rgba(0,0,0,0.4);*/
+    /*background-color: red;*/
+    border-bottom: 1px solid #DEDEDE;
 }
 
 .navbar-brand {
@@ -23,31 +25,52 @@
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
 
-    .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
+.nav-item ::deep a {
+    color: #231f20;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+    position: relative;
+}
 
 .nav-item ::deep a.active {
     background-color: rgba(255,255,255,0.25);
-    color: white;
+    color: #e2211c;
 }
 
 .nav-item ::deep a:hover {
     background-color: rgba(255,255,255,0.1);
-    color: white;
+    color: #e2211c;
+}
+.nav-item ::deep a:hover::before,
+.nav-item ::deep a.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #e2211c;
+    height: 23px;
+    margin: auto;
+}
+.nav-item ::deep a.fill-color:hover svg path,
+.nav-item ::deep a.fill-color.active svg path {
+    fill: #e2211c;
+}
+.nav-item ::deep a.strock-color:hover svg path,
+.nav-item ::deep a.strock-color.active svg path {
+    stroke: #e2211c;
 }
 
 @media (min-width: 641px) {

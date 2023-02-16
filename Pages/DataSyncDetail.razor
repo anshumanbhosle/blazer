@@ -1,0 +1,88 @@
+﻿@*@page "/datasync/detail";
+
+@using System.Net.Http.Json
+@using MudBlazor.Examples.Data.Models
+@inject HttpClient httpClient
+
+<div class="container-fluid px-5">
+    <div class="row">
+        <div class="col-12">
+            <MudTable class="customize-mud-table" Items="@Elements" Dense="false" Hover="true" Bordered="@bordered" Striped="@striped" Filter="new Func<Element,bool>(FilterFunc1)">
+                <ToolBarContent>
+                 
+                    <div class="row">
+                        <div class="col-md-6 col-9">
+                            <MudTextField @bind-Value="searchString1" Placeholder="Search by Name" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 ml-0 customize-mud-search"></MudTextField>
+                        </div>
+                        <div class="col-md-6 col-3">
+                            <div class="justify-content-end d-flex align-items-center">
+                                <button type="button" class="buttoncss1 mt-2">Sync</button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </ToolBarContent>
+                <ColGroup>
+                    <col />
+                    <col />
+                    <col style="width: 64%;" />
+
+                    
+                </ColGroup>
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">SOURCE NAME</MudTableSortLabel></MudTh>
+                    <MudTh>DESTINATION NAME</MudTh>
+                    <MudTh>SYNC DATE/TIME</MudTh>
+                  
+                  
+                    
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Name">@context.Name</MudTd>  
+                    <MudTd DataLabel="Sign">13/10/12</MudTd>
+                    <MudTd DataLabel="Nr">01/31/23 - 13:05</MudTd>
+                 
+                   
+                   
+                   
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager class="customize-pagination" HorizontalAlignment="HorizontalAlignment.Left" />
+                </PagerContent>
+            </MudTable>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+
+    private HashSet<Element> selectedItems = new HashSet<Element>();
+
+    private IEnumerable<Element> Elements = new List<Element>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Elements = await httpClient.GetFromJsonAsync<List<Element>>("https://getdetailsfaragut-apim.azure-api.net/FarragutApis/reappraisal/beaufort");
+    }
+
+    private bool FilterFunc1(Element element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(Element element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
+            return true;
+        return false;
+    }
+}*@

@@ -1,0 +1,197 @@
+﻿@page "/dashboard"
+
+@*<h3 class="mx-2">Dashboard</h3>*@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 card-col">
+            <div class="card card-stats">
+                <div class="card-header p-3">
+                <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-chart text-warning"></i>
+                        </div>
+                        <h3 class="card-title mb-0">Users</h3>
+                    </div>
+                    <div
+                    class="col-6 texxt-right d-flex align-items-center justify-content-end"
+                    >
+                        <button
+                            class="view-all btn bg-white d-flex align-items-center"
+                            to="/users"
+                        >
+                            View All
+                            <svg
+                            class="ms-1"
+                            width="10"
+                            height="10"
+                            viewBox="0 0 6 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                d="M0.374993 9.54169C0.263882 9.40281 0.204853 9.25003 0.197909 9.08336C0.190964 8.91669 0.249993 8.77086 0.374993 8.64586L4.04166 4.97919L0.354159 1.29169C0.243048 1.18058 0.190964 1.03128 0.197909 0.843778C0.204853 0.656278 0.263882 0.506972 0.374993 0.395861C0.513882 0.256972 0.663187 0.191 0.822909 0.197945C0.982631 0.204889 1.12499 0.270861 1.24999 0.395861L5.39583 4.54169C5.46527 4.61114 5.51388 4.68058 5.54166 4.75003C5.56944 4.81947 5.58333 4.89586 5.58333 4.97919C5.58333 5.06253 5.56944 5.13892 5.54166 5.20836C5.51388 5.27781 5.46527 5.34725 5.39583 5.41669L1.27083 9.54169C1.14583 9.66669 0.999992 9.72572 0.833325 9.71878C0.666659 9.71183 0.513882 9.65281 0.374993 9.54169Z"
+                                fill="#DA291C"
+                            />
+                            </svg>
+                        </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <h3 class="numbers">32</h3>
+                            <p class="body-title">Customer</p>
+                        </div>
+                            <div class="card-divider col-md-1 col-1 d-flex algin-items-center">
+                            <div class="vr p-0" style="height: 115px"></div>
+                        </div>
+                        <div class="col-3">
+                            <h3 class="numbers">90</h3>
+                            <p class="body-title">Customer Staff</p>
+                        </div>
+                        <div class="card-divider col-md-1 col-1 d-flex algin-items-center">
+                            <div class="vr p-0" style="height: 115px"></div>
+                        </div>
+                        <div class="col-3">
+                            <h3 class="numbers">08</h3>
+                            <p class="body-title">User Group</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 card-col">
+            <div class="card card-stats">
+                <div class="card-header p-3">
+                <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                    <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-chart text-warning"></i>
+                    </div>
+                    <h3 class="card-title mb-0">Report</h3>
+                    </div>
+                    <div
+                    class="col-6 texxt-right d-flex align-items-center justify-content-end"
+                    >
+                    <button class="view-all btn bg-white" to="/reports">
+                        View All
+                        <svg
+                        class="ms-1"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 6 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        >
+                        <path
+                            d="M0.374993 9.54169C0.263882 9.40281 0.204853 9.25003 0.197909 9.08336C0.190964 8.91669 0.249993 8.77086 0.374993 8.64586L4.04166 4.97919L0.354159 1.29169C0.243048 1.18058 0.190964 1.03128 0.197909 0.843778C0.204853 0.656278 0.263882 0.506972 0.374993 0.395861C0.513882 0.256972 0.663187 0.191 0.822909 0.197945C0.982631 0.204889 1.12499 0.270861 1.24999 0.395861L5.39583 4.54169C5.46527 4.61114 5.51388 4.68058 5.54166 4.75003C5.56944 4.81947 5.58333 4.89586 5.58333 4.97919C5.58333 5.06253 5.56944 5.13892 5.54166 5.20836C5.51388 5.27781 5.46527 5.34725 5.39583 5.41669L1.27083 9.54169C1.14583 9.66669 0.999992 9.72572 0.833325 9.71878C0.666659 9.71183 0.513882 9.65281 0.374993 9.54169Z"
+                            fill="#DA291C"
+                        />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+                </div>
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                    <h3 class="numbers">560</h3>
+                    <p class="body-title">Total</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 card-col">
+            <div class="card card-stats">
+            <div class="card-header p-3">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-chart text-warning"></i>
+                    </div>
+                    <h3 class="card-title mb-0">Feature Set</h3>
+                    </div>
+                <div
+                class="col-6 texxt-right d-flex align-items-center justify-content-end"
+                >
+                <button class="view-all btn bg-white">
+                    View All
+                    <svg
+                    class="ms-1"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 6 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M0.374993 9.54169C0.263882 9.40281 0.204853 9.25003 0.197909 9.08336C0.190964 8.91669 0.249993 8.77086 0.374993 8.64586L4.04166 4.97919L0.354159 1.29169C0.243048 1.18058 0.190964 1.03128 0.197909 0.843778C0.204853 0.656278 0.263882 0.506972 0.374993 0.395861C0.513882 0.256972 0.663187 0.191 0.822909 0.197945C0.982631 0.204889 1.12499 0.270861 1.24999 0.395861L5.39583 4.54169C5.46527 4.61114 5.51388 4.68058 5.54166 4.75003C5.56944 4.81947 5.58333 4.89586 5.58333 4.97919C5.58333 5.06253 5.56944 5.13892 5.54166 5.20836C5.51388 5.27781 5.46527 5.34725 5.39583 5.41669L1.27083 9.54169C1.14583 9.66669 0.999992 9.72572 0.833325 9.71878C0.666659 9.71183 0.513882 9.65281 0.374993 9.54169Z"
+                        fill="#DA291C"
+                    />
+                    </svg>
+                </button>
+                </div>
+            </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="numbers">36</h3>
+                        <p class="body-title">Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 card-col">
+            <div class="card card-stats">
+            <div class="card-header p-3">
+                <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-chart text-warning"></i>
+                        </div>
+                        <h3 class="card-title mb-0">Application</h3>
+                    </div>
+                    <div
+                    class="col-6 texxt-right d-flex align-items-center justify-content-end"
+                    >
+                        <button class="view-all btn bg-white">
+                            View All
+                            <svg
+                            class="ms-1"
+                            width="10"
+                            height="10"
+                            viewBox="0 0 6 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                d="M0.374993 9.54169C0.263882 9.40281 0.204853 9.25003 0.197909 9.08336C0.190964 8.91669 0.249993 8.77086 0.374993 8.64586L4.04166 4.97919L0.354159 1.29169C0.243048 1.18058 0.190964 1.03128 0.197909 0.843778C0.204853 0.656278 0.263882 0.506972 0.374993 0.395861C0.513882 0.256972 0.663187 0.191 0.822909 0.197945C0.982631 0.204889 1.12499 0.270861 1.24999 0.395861L5.39583 4.54169C5.46527 4.61114 5.51388 4.68058 5.54166 4.75003C5.56944 4.81947 5.58333 4.89586 5.58333 4.97919C5.58333 5.06253 5.56944 5.13892 5.54166 5.20836C5.51388 5.27781 5.46527 5.34725 5.39583 5.41669L1.27083 9.54169C1.14583 9.66669 0.999992 9.72572 0.833325 9.71878C0.666659 9.71183 0.513882 9.65281 0.374993 9.54169Z"
+                                fill="#DA291C"
+                            />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                <h3 class="numbers">22</h3>
+                <p class="body-title">Total</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}
